@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="dorbelApp">
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Dorbel</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="includes/stylesheets/style.css">
+
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="includes/js/app.js"></script>
 </head>
 <body>
+<div class="container">
 
+    <h1>title</h1>
+    <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+    <div ui-view></div>
+
+</div>
 </body>
 </html>
