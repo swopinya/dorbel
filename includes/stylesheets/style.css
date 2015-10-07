@@ -2,4 +2,55 @@
 * {
   padding: 0;
   margin: 0;
+  direction: rtl;
+}
+
+/* line 7, ../sass/_general.scss */
+.page-header {
+  background-color: #2D3E50;
+  padding: 40px 10px 40px 10px !important;
+  margin: 0 !important;
+}
+
+/* line 1, ../sass/_apartment-browse.scss */
+.filter-cont {
+  box-sizing: border-box;
+  background-color: #EDEDED;
+  padding: 40px 10px 40px 10px;
+  box-shadow: 0px 3px 4px -1px #bdbdbd;
+}
+
+/* line 8, ../sass/_apartment-browse.scss */
+.sort-cont {
+  box-sizing: border-box;
+  background-color: yellow;
+  padding: 50px 10px 50px 10px;
+}
+
+/* line 14, ../sass/_apartment-browse.scss */
+.content-cont {
+  width: 100%;
+}
+
+/* line 18, ../sass/_apartment-browse.scss */
+.col {
+  float: right;
+  width: 50%;
+}
+/* line 21, ../sass/_apartment-browse.scss */
+.col:nth-child(1) {
+  background-color: green;
+  padding: 20px 20px 20px 10px;
+}
+/* line 25, ../sass/_apartment-browse.scss */
+.col:nth-child(2) {
+  background-color: orange;
+  padding: 20px 10px 20px 20px;
+}
+
+/* line 31, ../sass/_apartment-browse.scss */
+.list-item-cont {
+  width: 100%;
+  margin-top: 20px;
+  box-shadow: 0 0px 1px 1px rgba(51, 51, 51, 0.8);
 }

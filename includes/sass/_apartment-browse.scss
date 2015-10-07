@@ -1,0 +1,35 @@
+.filter-cont{
+	box-sizing: border-box;
+	background-color: #EDEDED;
+	padding: 40px 10px 40px 10px;
+	box-shadow: 0px 3px 4px -1px rgba(#bdbdbd,1);
+}
+
+.sort-cont {
+	box-sizing: border-box;
+	background-color: yellow;
+	padding: 50px 10px 50px 10px;
+}
+
+.content-cont{
+	width: 100%;
+}
+
+.col{
+	float: right;
+	width: 50%;
+	&:nth-child(1) {
+		background-color: green;
+		padding: 20px 20px 20px 10px;
+	}
+	&:nth-child(2) {
+		background-color: orange;
+		padding: 20px 10px 20px 20px;
+	}
+}
+
+.list-item-cont{
+	width: 100%;
+	margin-top: 20px;
+	box-shadow: 0 0px 1px 1px rgba(#333, 0.8);
+}

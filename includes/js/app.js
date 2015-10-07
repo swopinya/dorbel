@@ -1,18 +1,20 @@
 /**
  * Created by Shimon on 07/10/2015.
  */
-var routerApp = angular.module('dorbelApp', ['ui.router']);
+var app = angular.module('dorbelApp', [
+    'ui.router',
+    'dorbelApp.controllers'
+]);
 
-routerApp.config(function($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/browse');
 
     $stateProvider
 
-        // HOME STATES AND NESTED VIEWS ========================================
-        .state('home', {
-            url: '/home',
-            templateUrl: 'partial-home.html'
-        });
+        .state('browse', {
+            url: '/browse',
+            templateUrl: 'templates/browse.html'
+        })
 
 });
