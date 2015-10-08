@@ -2,9 +2,42 @@
 <section class="sort-cont"></section>
 <section class="content-cont">
     <section class="col" ng-controller="ListCtrl">
-        <section class="list-item-cont" ng-repeat="apartment in apartments">
-            <img src="{{ apartment.image }}" />
+        <!--<section class="list-item-cont" ng-repeat="apartment in apartments">-->
+            <!--<img src="{{ apartment.image }}" />-->
+        <!--</section>-->
+        <section class="container list-item-cont" ng-repeat="apartment in apartments">
+            <section class="row">
+                <img class="apartment-thumbnail" src="{{ apartment.image }}" />
+                <section class="list-left-cont">
+                    <section class="list-col">
+                        <p class="title">{{ apartment.title }}</p>
+                        <p class="address">רחוב {{ apartment.address.street }}, {{apartment.address.city}} | {{apartment.address.area}}</p>
+                        <section class="details-cont">
+                            <section class="det-col"><p>{{ apartment.rooms }}</p><p>חדרים</p></section>
+                            <section class="det-col"><p>{{ apartment.sm }}</p><p>מ"ר</p></section>
+                            <section class="det-col"><p>{{ apartment.price }} &#8362;</p><p>לחודש</p></section>
+                            <div class="clear"></div>
+                        </section>
+                        <p class="enter-date">כניסה {{ apartment.enter_date }}</p>
+                    </section>
+                    <section class="list-col"></section>
+                </section>
+            </section>
         </section>
     </section>
-    <section class="col"></section>
+
+    <section class="col" ng-controller="MapCtrl">
+        <ui-gmap-google-map
+                center='map.center'
+                zoom='map.zoom'
+                events='map.events'>
+            <ui-gmap-marker
+                    idKey='0'
+                    coords='marker.coords'
+                    click='marker.click'
+                    options='marker.options'>
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </section>
+
 </section>

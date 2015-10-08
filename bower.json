@@ -1,0 +1,24 @@
+{
+  "name": "dorbel",
+  "version": "0.0.0",
+  "homepage": "https://github.com/swopinya/dorbel",
+  "authors": [
+    "Shimon <shimi0007@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.7",
+    "angular-google-maps": "~2.2.1"
+  }
+}

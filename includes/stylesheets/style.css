@@ -3,9 +3,10 @@
   padding: 0;
   margin: 0;
   direction: rtl;
+  font-family: Arial;
 }
 
-/* line 7, ../sass/_general.scss */
+/* line 8, ../sass/_general.scss */
 .page-header {
   background-color: #2D3E50;
   padding: 40px 10px 40px 10px !important;
@@ -39,18 +40,99 @@
 }
 /* line 21, ../sass/_apartment-browse.scss */
 .col:nth-child(1) {
-  background-color: green;
   padding: 20px 20px 20px 10px;
 }
-/* line 25, ../sass/_apartment-browse.scss */
+/* line 24, ../sass/_apartment-browse.scss */
 .col:nth-child(2) {
-  background-color: orange;
   padding: 20px 10px 20px 20px;
 }
 
-/* line 31, ../sass/_apartment-browse.scss */
+/* line 29, ../sass/_apartment-browse.scss */
 .list-item-cont {
   width: 100%;
   margin-top: 20px;
-  box-shadow: 0 0px 1px 1px rgba(51, 51, 51, 0.8);
+  box-shadow: 0 1px 5px -1px rgba(51, 51, 51, 0.8);
+}
+
+/* line 35, ../sass/_apartment-browse.scss */
+.apartment-thumbnail {
+  float: right;
+  width: 40%;
+  height: 150px;
+}
+
+/* line 41, ../sass/_apartment-browse.scss */
+.list-left-cont {
+  float: right;
+  width: 60%;
+  height: 150px;
+}
+
+/* line 47, ../sass/_apartment-browse.scss */
+.list-col {
+  float: right;
+  height: 150px;
+}
+/* line 50, ../sass/_apartment-browse.scss */
+.list-col:nth-child(1) {
+  position: relative;
+  width: 80%;
+  padding: 10px 20px 10px 20px;
+}
+/* line 55, ../sass/_apartment-browse.scss */
+.list-col:nth-child(2) {
+  width: 20%;
+}
+/* line 58, ../sass/_apartment-browse.scss */
+.list-col .title {
+  font-size: 14px;
+}
+/* line 61, ../sass/_apartment-browse.scss */
+.list-col .address {
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 0.6);
+}
+/* line 66, ../sass/_apartment-browse.scss */
+.list-col .details-cont {
+  width: 100%;
+}
+/* line 68, ../sass/_apartment-browse.scss */
+.list-col .details-cont .det-col {
+  float: right;
+  width: 30%;
+}
+/* line 72, ../sass/_apartment-browse.scss */
+.list-col .details-cont p {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 !important;
+}
+/* line 79, ../sass/_apartment-browse.scss */
+.list-col .enter-date {
+  position: absolute;
+  bottom: 0;
+  font-size: 10px;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 0.6);
+}
+
+/* line 88, ../sass/_apartment-browse.scss */
+.clear {
+  clear: both;
+}
+
+/* line 92, ../sass/_apartment-browse.scss */
+.angular-google-map-container {
+  height: 400px;
+  margin-top: 20px;
+}
+
+/* line 97, ../sass/_apartment-browse.scss */
+.marker-labels {
+  display: block;
+  height: 50px;
+  width: 50px;
+  background-color: brown;
 }

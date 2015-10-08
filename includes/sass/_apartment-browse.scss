@@ -19,11 +19,9 @@
 	float: right;
 	width: 50%;
 	&:nth-child(1) {
-		background-color: green;
 		padding: 20px 20px 20px 10px;
 	}
 	&:nth-child(2) {
-		background-color: orange;
 		padding: 20px 10px 20px 20px;
 	}
 }
@@ -31,5 +29,107 @@
 .list-item-cont{
 	width: 100%;
 	margin-top: 20px;
-	box-shadow: 0 0px 1px 1px rgba(#333, 0.8);
+	box-shadow: 0 1px 5px -1px rgba(#333, 0.8);
 }
+
+.apartment-thumbnail{
+	float: right;
+	width: 40%;
+	height: 150px;
+}
+
+.list-left-cont{
+	float: right;
+	width: 60%;
+	height: 150px;
+}
+
+.list-col{
+	float: right;
+	height: 150px;
+	&:nth-child(1){
+		position: relative;
+		width: 80%;
+		padding: 10px 20px 10px 20px;
+	}
+	&:nth-child(2){
+		width: 20%;
+	}
+	.title{
+		font-size: 14px;
+	}
+	.address{
+		font-size: 12px;
+		font-weight: bold;
+		color: rgba(#333, 0.6);
+	}
+	.details-cont{
+		width: 100%;
+		.det-col{
+			float: right;
+			width: 30%;
+		}
+		p{
+			font-size: 12px;
+			font-weight: bold;
+			text-align: center;
+			margin: 0 !important;
+		}
+	}
+	.enter-date{
+		position: absolute;
+		bottom: 0;
+		font-size: 10px;
+		font-weight: bold;
+		color: rgba(#333, 0.6);
+	}
+}
+
+.clear{
+	clear: both;
+}
+
+.angular-google-map-container {
+	height: 400px;
+	margin-top: 20px;
+}
+
+.marker-labels{
+	display: block;
+	height: 50px;
+	width: 50px;
+	background-color: brown;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
