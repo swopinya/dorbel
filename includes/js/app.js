@@ -4,6 +4,7 @@
 var app = angular.module('dorbelApp', [
     'ui.router',
     'uiGmapgoogle-maps',
+    'dorbelApp.services',
     'dorbelApp.controllers'
 ]);
 

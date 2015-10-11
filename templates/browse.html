@@ -5,7 +5,7 @@
         <!--<section class="list-item-cont" ng-repeat="apartment in apartments">-->
             <!--<img src="{{ apartment.image }}" />-->
         <!--</section>-->
-        <section class="container list-item-cont" ng-repeat="apartment in apartments">
+        <section class="container list-item-cont" check-last ng-repeat="apartment in apartments">
             <section class="row">
                 <img class="apartment-thumbnail" src="{{ apartment.image }}" />
                 <section class="list-left-cont">
@@ -30,14 +30,22 @@
         <ui-gmap-google-map
                 center='map.center'
                 zoom='map.zoom'
+                bounds='map.bounds'
                 events='map.events'>
-            <ui-gmap-marker
-                    idKey='0'
-                    coords='marker.coords'
-                    click='marker.click'
-                    options='marker.options'>
-            </ui-gmap-marker>
+            <!--<ui-gmap-marker-->
+                    <!--idKey='0'-->
+                    <!--coords='marker.coords'-->
+                    <!--click='marker.click'-->
+                    <!--options='marker.options' bounds='marker.bounds'>-->
+            <!--</ui-gmap-marker>-->
+            <ui-gmap-markers models="markers" coords="'self'">
+            </ui-gmap-markers>
         </ui-gmap-google-map>
+
+        <section class="map-tooltip">
+            <section class="image-cont" ng-style="{'background': 'url('+image_src+') no-repeat', 'background-size': 'cover', 'background-position': 'center center'}"></section>
+            <section class="text-cont"><p>{{ address }}</p></section>
+        </section>
     </section>
 
 </section>

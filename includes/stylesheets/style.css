@@ -40,76 +40,86 @@
 }
 /* line 21, ../sass/_apartment-browse.scss */
 .col:nth-child(1) {
-  padding: 20px 20px 20px 10px;
+  overflow: scroll;
+  direction: ltr;
+  overflow-x: hidden;
+  -ms-overflow-x: hidden;
+  margin-top: 38px;
+  height: 665px;
+  padding: 0 15px 20px 10px;
 }
-/* line 24, ../sass/_apartment-browse.scss */
+/* line 30, ../sass/_apartment-browse.scss */
 .col:nth-child(2) {
   padding: 20px 10px 20px 20px;
 }
 
-/* line 29, ../sass/_apartment-browse.scss */
+/* line 35, ../sass/_apartment-browse.scss */
 .list-item-cont {
   width: 100%;
   margin-top: 20px;
   box-shadow: 0 1px 5px -1px rgba(51, 51, 51, 0.8);
 }
+/* line 39, ../sass/_apartment-browse.scss */
+.list-item-cont:nth-child(1) {
+  margin-top: 2px !important;
+}
 
-/* line 35, ../sass/_apartment-browse.scss */
+/* line 44, ../sass/_apartment-browse.scss */
 .apartment-thumbnail {
   float: right;
   width: 40%;
   height: 150px;
 }
 
-/* line 41, ../sass/_apartment-browse.scss */
+/* line 50, ../sass/_apartment-browse.scss */
 .list-left-cont {
   float: right;
   width: 60%;
   height: 150px;
 }
 
-/* line 47, ../sass/_apartment-browse.scss */
+/* line 56, ../sass/_apartment-browse.scss */
 .list-col {
   float: right;
   height: 150px;
 }
-/* line 50, ../sass/_apartment-browse.scss */
+/* line 59, ../sass/_apartment-browse.scss */
 .list-col:nth-child(1) {
   position: relative;
   width: 80%;
   padding: 10px 20px 10px 20px;
 }
-/* line 55, ../sass/_apartment-browse.scss */
+/* line 64, ../sass/_apartment-browse.scss */
 .list-col:nth-child(2) {
   width: 20%;
 }
-/* line 58, ../sass/_apartment-browse.scss */
+/* line 67, ../sass/_apartment-browse.scss */
 .list-col .title {
   font-size: 14px;
 }
-/* line 61, ../sass/_apartment-browse.scss */
+/* line 70, ../sass/_apartment-browse.scss */
 .list-col .address {
   font-size: 12px;
   font-weight: bold;
   color: rgba(51, 51, 51, 0.6);
 }
-/* line 66, ../sass/_apartment-browse.scss */
+/* line 75, ../sass/_apartment-browse.scss */
 .list-col .details-cont {
   width: 100%;
 }
-/* line 68, ../sass/_apartment-browse.scss */
+/* line 77, ../sass/_apartment-browse.scss */
 .list-col .details-cont .det-col {
   float: right;
   width: 30%;
 }
-/* line 72, ../sass/_apartment-browse.scss */
+/* line 81, ../sass/_apartment-browse.scss */
 .list-col .details-cont p {
   font-size: 12px;
   font-weight: bold;
   text-align: center;
   margin: 0 !important;
 }
-/* line 79, ../sass/_apartment-browse.scss */
+/* line 88, ../sass/_apartment-browse.scss */
 .list-col .enter-date {
   position: absolute;
   bottom: 0;
@@ -118,21 +128,47 @@
   color: rgba(51, 51, 51, 0.6);
 }
 
-/* line 88, ../sass/_apartment-browse.scss */
+/* line 97, ../sass/_apartment-browse.scss */
 .clear {
   clear: both;
 }
 
-/* line 92, ../sass/_apartment-browse.scss */
+/* line 101, ../sass/_apartment-browse.scss */
 .angular-google-map-container {
   height: 400px;
   margin-top: 20px;
 }
 
-/* line 97, ../sass/_apartment-browse.scss */
+/* line 106, ../sass/_apartment-browse.scss */
 .marker-labels {
   display: block;
   height: 50px;
   width: 50px;
   background-color: brown;
+}
+
+/* line 113, ../sass/_apartment-browse.scss */
+.map-tooltip {
+  display: none;
+  width: 150px;
+  height: 70px;
+  background-color: #fff;
+  box-shadow: 0 0 2px 1px rgba(51, 51, 51, 0.6);
+}
+/* line 119, ../sass/_apartment-browse.scss */
+.map-tooltip .image-cont {
+  width: 70px;
+  height: 70px;
+  float: right;
+}
+/* line 124, ../sass/_apartment-browse.scss */
+.map-tooltip .text-cont {
+  width: 80px;
+  height: 70px;
+  float: right;
+  padding: 5px;
+}
+/* line 130, ../sass/_apartment-browse.scss */
+.map-tooltip p {
+  font-size: 12px;
 }
