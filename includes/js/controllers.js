@@ -4,21 +4,63 @@
 var app = angular.module('dorbelApp.controllers', [
     'dorbelApp.services'
 ]);
-var base_url = 'http://dorbel-server.herokuapp.com';
+//var base_url = 'http://dorbel-server.herokuapp.com';
+var base_url = 'http://localhost:3000';
 
-app.controller('ListCtrl', function ($scope, $rootScope, $http, my_map) {
+app.controller('ListCtrl', function ($scope, $rootScope, $http, $filter, my_map) {
 
+    var orderBy = $filter('orderBy');
+    var date_sort = 'DES';
     $http.get(base_url + '/apartments-list').then(
         function success(res) {
-            $scope.apartments = res.data;
-            my_map.set_apartments(res.data);
+            var aps = published(res.data);
+            $scope.count = aps.length;
+            $scope.apartments = aps;
+            console.log(aps[0]);
+            my_map.set_apartments(aps);
         },
         function error(res) {
             console.log(res);
         }
     );
 
+
+    //$scope.order = function(predicate, sort_by) {
+    //    $scope.date_sort_mark = '▼';
+    //    $scope.apartments = orderBy($scope.apartments, predicate, reverse);
+    //};
+    //
+    //$scope.dateSort = function (){
+    //    var sort_type = '';
+    //    if(date_sort == 'DES'){
+    //        date_sort = 'ASC';
+    //        $scope.date_sort_mark = '▼';
+    //        sort_type = 'DATE_DES';
+    //    }
+    //    else{
+    //        date_sort = 'DES';
+    //        $scope.date_sort_mark = '▲';
+    //    }
+    //};
+
+
 });
+
+function published(aps){
+    for(var i = 0 in aps){
+        var count_type = '';
+        var publish = aps[i].publish;
+        if(publish >= 24) {
+            publish = parseInt(publish / 24)+1;
+            count_type = ' ימים';
+        }
+        else count_type = ' שעות';
+        //console.log(aps[i].publish + ' : ' + publish + ' : ' + count_type);
+        aps[i].published_str = 'הועלה לפני '+publish+count_type;
+        aps[i].publish_type = count_type.replace(/\s/g, '');
+    }
+    return aps;
+}
 
 app.directive('checkLast', function ($rootScope) {
     return {
@@ -68,26 +110,14 @@ app.directive('checkLast', function ($rootScope) {
     }
 });
 
-app.controller('MapCtrl', function ($scope, $rootScope, uiGmapGoogleMapApi, uiGmapLogger, uiGmapIsReady, my_map) {
+app.controller('MapCtrl', function ($scope, $rootScope, uiGmapGoogleMapApi, uiGmapLogger, uiGmapIsReady) {
 
     var apartments = [];
     $rootScope.$on('apartmentsRendered', function (e, aps) {
         apartments = aps;
         generate_markers();
         fit_markers();
-        //calculate_map_center();
     });
-
-    //function calculate_map_center() {
-    //    var tot_lat = 0, tot_lon = 0, len = apartments.length;
-    //    for (var i = 0 in apartments) {
-    //        tot_lat += apartments[i].point.latitude;
-    //        tot_lon += apartments[i].point.longitude;
-    //    }
-    //    var cen_lat = tot_lat / len;
-    //    var cen_lon = tot_lon / len;
-    //    $scope.map.center = {latitude: cen_lat, longitude: cen_lon};
-    //}
 
     function generate_markers() {
         var markers = [];
@@ -156,16 +186,16 @@ app.controller('MapCtrl', function ($scope, $rootScope, uiGmapGoogleMapApi, uiGm
     });
 
     var dragstart = function () {
-        console.log('dragstart');
+        //console.log('dragstart');
     };
     var drag = function () {
-        console.log('drag');
+        //console.log('drag');
     };
     var dragend = function () {
-        console.log('dragend');
+        //console.log('dragend');
     };
     var bounds_changed = function () {
-        console.log('bounds_changed');
+        //console.log('bounds_changed');
     };
 
     $scope.map = {

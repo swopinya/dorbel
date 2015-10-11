@@ -13,8 +13,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('browse', {
             url: '/browse',
-            templateUrl: 'templates/browse.html'
-            //controller
+            templateUrl: 'templates/browse.html',
+            controller: 'ListCtrl'
         });
 
     $urlRouterProvider.otherwise('/browse');
@@ -28,12 +28,3 @@ app.config(function(uiGmapGoogleMapApiProvider) {
         libraries: 'weather,geometry,visualization'
     });
 });
-
-//angular.module('myApplicationModule', ['uiGmapgoogle-maps']).config(
-//    ['uiGmapGoogleMapApiProvider', function(GoogleMapApiProviders) {
-//        GoogleMapApiProviders.configure({
-//            china: true
-//        });
-//    }]
-//);
-

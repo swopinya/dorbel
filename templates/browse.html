@@ -1,13 +1,23 @@
 <section class="filter-cont"></section>
-<section class="sort-cont"></section>
+<section class="sort-cont">
+    <ul>
+        <li>מיין לפי:</li>
+        <li> | </li>
+        <li ng-click="order('publish', 'DATE')">תאריך{{ date_sort_mark }}</li>
+        <li> | </li>
+        <li>נמצאו {{ count }} דירות</li>
+    </ul>
+</section>
 <section class="content-cont">
-    <section class="col" ng-controller="ListCtrl">
+    <section class="col">
         <!--<section class="list-item-cont" ng-repeat="apartment in apartments">-->
             <!--<img src="{{ apartment.image }}" />-->
         <!--</section>-->
         <section class="container list-item-cont" check-last ng-repeat="apartment in apartments">
             <section class="row">
-                <img class="apartment-thumbnail" src="{{ apartment.image }}" />
+                <section class="img-wrap"><img class="apartment-thumbnail" src="{{ apartment.image }}"/>
+                    <p>{{ apartment.published_str }}</p>
+                </section>
                 <section class="list-left-cont">
                     <section class="list-col">
                         <p class="title">{{ apartment.title }}</p>
@@ -42,7 +52,7 @@
             </ui-gmap-markers>
         </ui-gmap-google-map>
 
-        <section class="map-tooltip">
+        <section class="map-tooltip transition">
             <section class="image-cont" ng-style="{'background': 'url('+image_src+') no-repeat', 'background-size': 'cover', 'background-position': 'center center'}"></section>
             <section class="text-cont"><p>{{ address }}</p></section>
         </section>
