@@ -7,16 +7,23 @@ var app = angular.module('dorbelApp.controllers', [
 //var base_url = 'http://dorbel-server.herokuapp.com';
 var base_url = 'http://localhost:3000';
 
+var DATES = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+var date_sort_state = rooms_sort_state = sm_sort_state = price_sort_state = enter_sort_state = 'DES';
+
 app.controller('ListCtrl', function ($scope, $rootScope, $http, $filter, my_map) {
 
     var orderBy = $filter('orderBy');
-    var date_sort = 'DES';
+
     $http.get(base_url + '/apartments-list').then(
         function success(res) {
-            var aps = published(res.data);
+            var aps = [], arr = res.data;
+            for(var i = 0 in arr){
+                arr[i] = set_published_str(arr[i]);
+                set_enter_str(arr[i]);
+                aps.push(arr[i]);
+            }
             $scope.count = aps.length;
             $scope.apartments = aps;
-            console.log(aps[0]);
             my_map.set_apartments(aps);
         },
         function error(res) {
@@ -24,59 +31,37 @@ app.controller('ListCtrl', function ($scope, $rootScope, $http, $filter, my_map)
         }
     );
 
+    $scope.order = function(predicate, sort_by) {
+        order_list($scope, orderBy, predicate, sort_by);
+        $rootScope.$broadcast('listFiltered');
+    };
 
-    //$scope.order = function(predicate, sort_by) {
-    //    $scope.date_sort_mark = '▼';
-    //    $scope.apartments = orderBy($scope.apartments, predicate, reverse);
-    //};
-    //
-    //$scope.dateSort = function (){
-    //    var sort_type = '';
-    //    if(date_sort == 'DES'){
-    //        date_sort = 'ASC';
-    //        $scope.date_sort_mark = '▼';
-    //        sort_type = 'DATE_DES';
-    //    }
-    //    else{
-    //        date_sort = 'DES';
-    //        $scope.date_sort_mark = '▲';
-    //    }
-    //};
-
+    $scope.goTo = function(id){
+        //$state.go('apartment', {apt_id: id});
+    }
 
 });
 
-function published(aps){
-    for(var i = 0 in aps){
-        var count_type = '';
-        var publish = aps[i].publish;
-        if(publish >= 24) {
-            publish = parseInt(publish / 24)+1;
-            count_type = ' ימים';
-        }
-        else count_type = ' שעות';
-        //console.log(aps[i].publish + ' : ' + publish + ' : ' + count_type);
-        aps[i].published_str = 'הועלה לפני '+publish+count_type;
-        aps[i].publish_type = count_type.replace(/\s/g, '');
-    }
-    return aps;
-}
-
-app.directive('checkLast', function ($rootScope) {
+app.directive('checkLast', function ($rootScope, my_map) {
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
             if (scope.$last === true) {
                 var onscreen_apartments = [];
                 element.ready(function () {  // or maybe $timeout
+                    $('.selectpicker').selectpicker();
                     $('.row').onScreen({
                         container: $('.col:nth-child(1)'),
                         direction: 'vertical',
                         doIn: function () {
-                            broadcast();
+                            my_map.set_aps_list_scrolled(true);
+                            $rootScope.$broadcast('apartmentsRendered', generate_onscreen());
+                            scope.$apply();
                         },
                         doOut: function () {
-                            broadcast();
+                            my_map.set_aps_list_scrolled(true);
+                            $rootScope.$broadcast('apartmentsRendered', generate_onscreen());
+                            scope.$apply();
                         },
                         tolerance: 0,
                         throttle: 50,
@@ -95,10 +80,20 @@ app.directive('checkLast', function ($rootScope) {
                         return arr;
                     }
 
-                    function broadcast() {
-                        $rootScope.$broadcast('apartmentsRendered', generate_onscreen());
-                        scope.$apply();
-                    }
+                    $rootScope.$on('listFiltered', function(){
+                        onscreen_apartments = [];
+                        if(! my_map.get_aps_list_scrolled()){
+                            $.each($('.row'), function (i) {
+                                if (!$('.col').isChildOverflowing('.row:eq(' + i + ')')) onscreen_apartments.push(scope.apartments[i]);
+                            });
+                        }
+                        else{
+                            $.each($('.row'), function (i) {
+                                if (this.isVisible(this)) onscreen_apartments.push(scope.apartments[i]);
+                            });
+                        }
+                        $rootScope.$broadcast('apartmentsRendered', onscreen_apartments);
+                    });
 
                     $.each($('.row'), function (i) {
                         if (!$('.col').isChildOverflowing('.row:eq(' + i + ')')) onscreen_apartments.push(scope.apartments[i]);
@@ -211,3 +206,93 @@ app.controller('MapCtrl', function ($scope, $rootScope, uiGmapGoogleMapApi, uiGm
     };
 
 });
+
+function set_published_str(ap){
+    var count_type = '';
+    var publish = ap.publish;
+    if(publish >= 24) {
+        publish = parseInt(publish / 24)+1;
+        count_type = ' ימים';
+    }
+    else count_type = ' שעות';
+    ap.published_str = 'הועלה לפני '+publish+count_type;
+    ap.publish_type = count_type.replace(/\s/g, '');
+    return ap;
+}
+
+function set_enter_str(ap){
+    ap.enter_date_str = ap.enter_date.day + ' ' + 'ב' + DATES[ap.enter_date.month-1] + ', ' + ap.enter_date.year;
+    return ap;
+}
+
+function order_list($scope, orderBy, predicate, sort_by){
+    reset_marks($scope);
+    if(sort_by == 'DATE'){
+        if(date_sort_state == 'DES'){
+            date_sort_state = 'ASC';
+            $scope.date_sort_mark = '▼';
+            $scope.apartments = orderBy($scope.apartments, predicate);
+        }
+        else{
+            date_sort_state = 'DES';
+            $scope.date_sort_mark = '▲';
+            $scope.apartments = orderBy($scope.apartments, predicate, 'reverse');
+        }
+    }
+    if(sort_by == 'ROOMS'){
+        if(rooms_sort_state == 'DES'){
+            rooms_sort_state = 'ASC';
+            $scope.rooms_sort_mark = '▼';
+            $scope.apartments = orderBy($scope.apartments, predicate);
+        }
+        else{
+            rooms_sort_state = 'DES';
+            $scope.rooms_sort_mark = '▲';
+            $scope.apartments = orderBy($scope.apartments, predicate, 'reverse');
+        }
+    }
+    if(sort_by == 'SQUARE_METERS'){
+        if(sm_sort_state == 'DES'){
+            sm_sort_state = 'ASC';
+            $scope.sm_sort_mark = '▼';
+            $scope.apartments = orderBy($scope.apartments, predicate);
+        }
+        else{
+            sm_sort_state = 'DES';
+            $scope.sm_sort_mark = '▲';
+            $scope.apartments = orderBy($scope.apartments, predicate, 'reverse');
+        }
+    }
+    if(sort_by == 'PRICE'){
+        if(price_sort_state == 'DES'){
+            price_sort_state = 'ASC';
+            $scope.price_sort_mark = '▼';
+            $scope.apartments = orderBy($scope.apartments, predicate);
+        }
+        else{
+            price_sort_state = 'DES';
+            $scope.price_sort_mark = '▲';
+            $scope.apartments = orderBy($scope.apartments, predicate, 'reverse');
+        }
+    }
+    if(sort_by == 'ENTER_DATE'){
+        if(enter_sort_state == 'DES'){
+            enter_sort_state = 'ASC';
+            $scope.enter_sort_mark = '▼';
+            $scope.apartments = orderBy($scope.apartments, predicate);
+        }
+        else{
+            enter_sort_state = 'DES';
+            $scope.enter_sort_mark = '▲';
+            $scope.apartments = orderBy($scope.apartments, predicate, 'reverse');
+        }
+    }
+}
+
+function reset_marks($scope){
+    $scope.date_sort_mark = '';
+    $scope.rooms_sort_mark = '';
+    $scope.sm_sort_mark = '';
+    $scope.price_sort_mark = '';
+    $scope.enter_sort_mark = '';
+}

@@ -1,9 +1,26 @@
-<section class="filter-cont"></section>
+<section class="filter-cont">
+    <select class="selectpicker" multiple data-selected-text-format="values" data-live-search="true" title='בחר עיר'>
+        <option>תל אביב-יפו</option>
+        <option>הרצליה</option>
+        <option>רמת השרון</option>
+        <option>כפר סבא</option>
+        <option>הוד השרון</option>
+        <option>ראשון לציון</option>
+    </select>
+</section>
 <section class="sort-cont">
     <ul>
         <li>מיין לפי:</li>
         <li> | </li>
-        <li ng-click="order('publish', 'DATE')">תאריך{{ date_sort_mark }}</li>
+        <li class="pointer" ng-click="order('publish', 'DATE')">תאריך פרסום {{ date_sort_mark }}</li>
+        <li> | </li>
+        <li class="pointer" ng-click="order('rooms', 'ROOMS')">מס' חדרים {{ rooms_sort_mark }}</li>
+        <li> | </li>
+        <li class="pointer" ng-click="order('sm', 'SQUARE_METERS')">מ"ר {{ sm_sort_mark }}</li>
+        <li> | </li>
+        <li class="pointer" ng-click="order('price', 'PRICE')">מחיר {{ price_sort_mark }}</li>
+        <li> | </li>{{ enter_date_mark }}
+        <li class="pointer" ng-click="order('enter_date.year', 'ENTER_DATE')">תאריך כניסה {{ enter_sort_mark }}</li>
         <li> | </li>
         <li>נמצאו {{ count }} דירות</li>
     </ul>
@@ -13,7 +30,7 @@
         <!--<section class="list-item-cont" ng-repeat="apartment in apartments">-->
             <!--<img src="{{ apartment.image }}" />-->
         <!--</section>-->
-        <section class="container list-item-cont" check-last ng-repeat="apartment in apartments">
+        <section class="container list-item-cont" check-last ng-repeat="apartment in apartments" ng-click="goTo(apartment.id)">
             <section class="row">
                 <section class="img-wrap"><img class="apartment-thumbnail" src="{{ apartment.image }}"/>
                     <p>{{ apartment.published_str }}</p>
@@ -28,7 +45,7 @@
                             <section class="det-col"><p>{{ apartment.price }} &#8362;</p><p>לחודש</p></section>
                             <div class="clear"></div>
                         </section>
-                        <p class="enter-date">כניסה {{ apartment.enter_date }}</p>
+                        <p class="enter-date">כניסה {{ apartment.enter_date_str }}</p>
                     </section>
                     <section class="list-col"></section>
                 </section>

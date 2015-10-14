@@ -7,12 +7,21 @@
 
 .sort-cont {
 	box-sizing: border-box;
-	background-color: yellow;
-	padding: 80px 10px 0 10px;
+	padding: 60px 30px 0 10px;
 	li{
 		display: inline;
-		&:nth-child(3){
+		padding-right: 5px;
+		padding-left: 5px;
+		font-size: 12px;
+		&.pointer{
 			cursor: pointer;
+		}
+		&:nth-child(even){
+			color: rgba(#333, 0.3);
+		}
+		&:nth-last-child(1){
+			font-size: 11px;
+			color: rgba(#333, 0.5);
 		}
 	}
 }
@@ -29,12 +38,12 @@
 		direction: ltr;
 		overflow-x: hidden;
 		-ms-overflow-x: hidden;
-		margin-top: 38px;
+		margin-top: 18px;
 		height: 665px;
 		padding: 0 15px 20px 10px;
 	}
 	&:nth-child(2) {
-		padding: 20px 10px 20px 20px;
+		padding: 0 10px 20px 20px;
 	}
 }
 
@@ -42,6 +51,7 @@
 	width: 100%;
 	margin-top: 20px;
 	box-shadow: 0 1px 5px -1px rgba(#333, 0.8);
+	cursor: pointer;
 	&:nth-child(1) {
 		margin-top: 2px !important;
 	}
@@ -150,6 +160,37 @@
 		font-size: 12px;
 	}
 }
+
+// Bootstrap selectpicker
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
+	width: 170px;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .filter-option{
+	text-align: right !important;
+	width: 90% !important;
+}
+.caret {
+	right: auto !important;
+	left: 12px;
+}
+.dropdown-menu{
+	text-align: right !important;
+}
+.bootstrap-select.btn-group.show-tick .dropdown-menu li a span.text{
+	margin-right: 0 !important;
+}
+
+.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark{
+	right: auto !important;
+	left: 15px;
+}
+
+.bootstrap-select > .dropdown-toggle{
+	padding-right: 0 !important;
+	padding-left: 30px !important;
+}
+
 
 
 
